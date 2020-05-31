@@ -7,7 +7,7 @@ resource "azurerm_virtual_network" "TFNet" {
     name                = "TFVnet"
     address_space       = ["10.0.0.0/16"]
     location            = "East US"
-    resource_group_name = "Enter Resource Group Name"
+    resource_group_name = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
 
     tags = {
         environment = "Terraform VNET"
@@ -16,7 +16,7 @@ resource "azurerm_virtual_network" "TFNet" {
 # Create subnet
 resource "azurerm_subnet" "tfsubnet" {
     name                 = "default"
-    resource_group_name = "Enter Resource Group Name"
+    resource_group_name = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
     virtual_network_name = azurerm_virtual_network.TFNet.name
     address_prefix       = "10.0.1.0/24"
 }
@@ -25,16 +25,16 @@ resource "azurerm_subnet" "tfsubnet" {
 resource "azurerm_public_ip" "example" {
   name                = "pubip1"
   location            = "East US"
-  resource_group_name = "Enter Resource Group Name"
+  resource_group_name = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
   allocation_method   = "Dynamic"
   sku                 = "Basic"
 }
 
 #Create NIC
 resource "azurerm_network_interface" "example" {
-  name                = "Enter name for this NIC"  
+  name                = "vNic"  
   location            = "East US"
-  resource_group_name = "Enter Resource Group Name"
+  resource_group_name = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
 
     ip_configuration {
     name                          = "ipconfig1"
@@ -46,8 +46,8 @@ resource "azurerm_network_interface" "example" {
 
 #Create Boot Diagnostic Account
 resource "azurerm_storage_account" "sa" {
-  name                     = "Enter Name for Diagnostic Account" 
-  resource_group_name      = "Enter Resource Group Name"
+  name                     = "mydiag5312020" 
+  resource_group_name      = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
   location                 = "East US"
    account_tier            = "Standard"
    account_replication_type = "LRS"
@@ -60,9 +60,9 @@ resource "azurerm_storage_account" "sa" {
 
 #Create Virtual Machine
 resource "azurerm_virtual_machine" "example" {
-  name                  = "Enter AzureVM Name"  
+  name                  = "my-VM"  
   location              = "East US"
-  resource_group_name   = "Enter Resource Group Name"
+  resource_group_name   = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
   network_interface_ids = [azurerm_network_interface.example.id]
   vm_size               = "Standard_B1s"
   delete_os_disk_on_termination = true
@@ -84,7 +84,7 @@ resource "azurerm_virtual_machine" "example" {
   }
 
   os_profile {
-    computer_name  = "Enter Server Name"
+    computer_name  = "my-VM"
     admin_username = "vmadmin"
     admin_password = "Password12345!"
   }
