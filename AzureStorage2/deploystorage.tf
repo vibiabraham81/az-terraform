@@ -1,7 +1,7 @@
 provider "azurerm" {
     version = 1.38
     }
-
+#Resource name
 resource "azurerm_storage_account" "lab" {
   name                     = "vibistoragenew5312020"
   resource_group_name      = "183-47e545-deploy-an-azure-file-share-with-terrafo"
@@ -9,19 +9,20 @@ resource "azurerm_storage_account" "lab" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
-
+#Blob details
 resource "azurerm_storage_container" "lab" {
   name                  = "blobcontainer4lab"
   storage_account_name  = azurerm_storage_account.lab.name
   container_access_type = "private"
 }
-
+#Blob details
 resource "azurerm_storage_blob" "lab" {
   name                   = "TerraformBlob"
   storage_account_name   = azurerm_storage_account.lab.name
   storage_container_name = azurerm_storage_container.lab.name
   type                   = "Block"
 }
+#Share details
 resource "azurerm_storage_share" "lab" {
   name                 = "terraformshare"  
   storage_account_name = azurerm_storage_account.lab.name
