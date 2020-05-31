@@ -3,8 +3,8 @@ provider "azurerm" {
     }
 
 resource "azurerm_storage_account" "lab" {
-  name                     = "unique storage account name"
-  resource_group_name      = "Enter Resource Group Name"
+  name                     = "vibistoragenew5312020"
+  resource_group_name      = "183-47e545-deploy-an-azure-file-share-with-terrafo"
   location                 = "eastus"
   account_tier             = "Standard"
   account_replication_type = "LRS"
