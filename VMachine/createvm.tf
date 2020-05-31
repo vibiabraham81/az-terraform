@@ -16,7 +16,7 @@ resource "azurerm_virtual_network" "TFNet" {
 # Create subnet
 resource "azurerm_subnet" "tfsubnet" {
     name                 = "default"
-    resource_group_name = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
+    resource_group_name = "azurerm_virtual_network.TFNet.resource_group_name"
     virtual_network_name = azurerm_virtual_network.TFNet.name
     address_prefix       = "10.0.1.0/24"
 }
@@ -25,7 +25,7 @@ resource "azurerm_subnet" "tfsubnet" {
 resource "azurerm_public_ip" "example" {
   name                = "pubip1"
   location            = "East US"
-  resource_group_name = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
+  resource_group_name = "azurerm_virtual_network.TFNet.resource_group_name"
   allocation_method   = "Dynamic"
   sku                 = "Basic"
 }
@@ -34,7 +34,7 @@ resource "azurerm_public_ip" "example" {
 resource "azurerm_network_interface" "example" {
   name                = "vNic"  
   location            = "East US"
-  resource_group_name = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
+  resource_group_name = "azurerm_virtual_network.TFNet.resource_group_name"
 
     ip_configuration {
     name                          = "ipconfig1"
@@ -47,7 +47,7 @@ resource "azurerm_network_interface" "example" {
 #Create Boot Diagnostic Account
 resource "azurerm_storage_account" "sa" {
   name                     = "mydiag5312020" 
-  resource_group_name      = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
+  resource_group_name      = "azurerm_virtual_network.TFNet.resource_group_name"
   location                 = "East US"
    account_tier            = "Standard"
    account_replication_type = "LRS"
@@ -62,7 +62,7 @@ resource "azurerm_storage_account" "sa" {
 resource "azurerm_virtual_machine" "example" {
   name                  = "my-VM"  
   location              = "East US"
-  resource_group_name   = "187-41ed10-deploying-an-azure-vm-with-terraform-nm"
+  resource_group_name   = "azurerm_virtual_network.TFNet.resource_group_name"
   network_interface_ids = [azurerm_network_interface.example.id]
   vm_size               = "Standard_B1s"
   delete_os_disk_on_termination = true
